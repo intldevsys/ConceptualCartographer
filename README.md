@@ -2,7 +2,7 @@
 
 #### NOTE: This project is the result of an experiment in "minimal guidance" collaborative AI prompting using gemini-2.5-pro-preview-03-25, wherein two language models were provided an open-ended task of collaborating and completing a piece of working code; the utility of which  was also left intentionally undefined. No additional instructions or guidance was included.
 
-#### An audit was also performed by an additional LLM, outlining some potential fundamental flaws hindering efficiency with the first iteration and the Claude Opus-modified product is what is shown here. The full documentation for the process from initial autonomous collaboration to the final product will be included upon request.
+#### An audit was also performed by an additional LLM, outlining some potential fundamental flaws hindering efficiency with the first iteration and the Claude Opus-modified product is what is shown here. The full documentation for the process from initial autonomous collaboration to the final product will be included upon request. The end product, as well as the summary and workflow diagrams below were LLM-produced, as well.
 
 An advanced natural language processing tool that automatically discovers conceptual structures, causal relationships, and semantic influences within text documents. Built with state-of-the-art machine learning techniques including transformer embeddings, HDBSCAN clustering, and statistical inference.
 
@@ -39,6 +39,8 @@ Conceptual Cartographer transforms unstructured text into rich, interactive conc
 - **Strategy Analysis**: Map strategic concepts and their causal relationships
 - **Process Documentation**: Understand complex business processes and their dependencies
 - **Innovation Mapping**: Identify innovation opportunities through concept analysis
+- 
+<img width="1618" height="928" alt="image" src="https://github.com/user-attachments/assets/dacd54fa-1b31-446b-b3d1-e102ea708ad5" />
 
 ## 🔧 How It Works
 
@@ -138,6 +140,7 @@ networkx>=2.8.0
 transformers>=4.20.0
 torch>=1.12.0
 scipy>=1.8.0
+argparse
 ```
 
 ## 🔬 Technical Details
