@@ -1,0 +1,248 @@
+
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <title>Conceptual Cartographer 2.0</title>
+            <script src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
+            <style>
+                body { 
+                    margin: 0; 
+                    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+                    background: #1a1a1a;
+                    color: #e0e0e0;
+                }
+                #container {
+                    display: grid;
+                    grid-template-columns: 1fr 350px;
+                    height: 100vh;
+                }
+                #network {
+                    background: #0a0a0a;
+                    border-right: 1px solid #333;
+                    width: 100%;
+                    height: 100vh;
+                    min-height: 500px;
+                }
+                #sidebar {
+                    padding: 20px;
+                    overflow-y: auto;
+                    background: #1a1a1a;
+                }
+                h1 {
+                    font-size: 24px;
+                    margin-bottom: 20px;
+                    color: #6B8FFF;
+                }
+                .section {
+                    margin-bottom: 30px;
+                    padding: 15px;
+                    background: #252525;
+                    border-radius: 8px;
+                }
+                .stat {
+                    display: flex;
+                    justify-content: space-between;
+                    margin: 10px 0;
+                    font-size: 14px;
+                }
+                .stat-value {
+                    color: #6BCF7F;
+                    font-weight: bold;
+                }
+                #selected-info {
+                    margin-top: 20px;
+                    padding: 15px;
+                    background: #2a2a3a;
+                    border-radius: 8px;
+                    min-height: 100px;
+                }
+                .legend {
+                    display: flex;
+                    flex-wrap: wrap;
+                    gap: 10px;
+                    margin-top: 10px;
+                }
+                .legend-item {
+                    display: flex;
+                    align-items: center;
+                    gap: 5px;
+                    font-size: 12px;
+                }
+                .legend-color {
+                    width: 20px;
+                    height: 3px;
+                }
+                button {
+                    background: #6B8FFF;
+                    color: white;
+                    border: none;
+                    padding: 8px 16px;
+                    border-radius: 4px;
+                    cursor: pointer;
+                    margin-right: 10px;
+                }
+                button:hover {
+                    background: #5a7ee8;
+                }
+            </style>
+        </head>
+        <body>
+            <div id="container">
+                <div id="network"></div>
+                <div id="sidebar">
+                    <h1>Conceptual Map Analysis</h1>
+                    
+                    <div class="section">
+                        <h3>Overview</h3>
+                        <div class="stat">
+                            <span>Concepts Discovered:</span>
+                            <span class="stat-value">11</span>
+                        </div>
+                        <div class="stat">
+                            <span>Causal Relations:</span>
+                            <span class="stat-value">3</span>
+                        </div>
+                        <div class="stat">
+                            <span>Semantic Influences:</span>
+                            <span class="stat-value">72</span>
+                        </div>
+                    </div>
+                    
+                    <div class="section">
+                        <h3>Relation Types</h3>
+                        <div class="legend">
+                            <div class="legend-item">
+                                <div class="legend-color" style="background: #FF6B6B;"></div>
+                                <span>Causation</span>
+                            </div>
+                            <div class="legend-item">
+                                <div class="legend-color" style="background: #FFA06B;"></div>
+                                <span>Prevention</span>
+                            </div>
+                            <div class="legend-item">
+                                <div class="legend-color" style="background: #6BCF7F;"></div>
+                                <span>Enablement</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="section">
+                        <h3>Controls</h3>
+                        <button onclick="resetView()">Reset View</button>
+                        <button onclick="togglePhysics()">Toggle Physics</button>
+                        <button onclick="console.log('Nodes:', nodesData.length, 'Edges:', edgesData.length); network.fit();">Debug & Fit</button>
+                    </div>
+                    
+                    <div id="selected-info">
+                        <h3>Selected Element</h3>
+                        <p>Click on a node or edge to see details</p>
+                    </div>
+                </div>
+            </div>
+            
+<script>
+    // Data
+    const nodesData = [{"id": 1, "label": "At the same time, the ability to learn probably do...", "x": 351.41905847316974, "y": 561.242317116735, "value": 30.0, "title": "Confidence: 1.00<br>Stability: 0.55", "color": {"background": "rgba(150, 150, 250, 0.5482562184333801)", "border": "#4040A0"}}, {"id": 3, "label": "Stated differently, Amdahl's law is suitable when ...", "x": 205.55309234534624, "y": 70.21407381306196, "value": 30.0, "title": "Confidence: 1.00<br>Stability: 0.69", "color": {"background": "rgba(150, 150, 250, 0.6859751343727112)", "border": "#4040A0"}}, {"id": 4, "label": "For this reason, the vast majority of the energy c...", "x": 102.77438135537062, "y": 219.1681144151263, "value": 30.0, "title": "Confidence: 1.00<br>Stability: 0.68", "color": {"background": "rgba(150, 150, 250, 0.6802996397018433)", "border": "#4040A0"}}, {"id": 6, "label": "The extent and implications of this noise as it re...", "x": 507.42242156811415, "y": 575.2431548738459, "value": 30.0, "title": "Confidence: 1.00<br>Stability: 0.73", "color": {"background": "rgba(150, 150, 250, 0.7256771922111511)", "border": "#4040A0"}}, {"id": 7, "label": "For example, a simple ALU has dedicated hardware t...", "x": 640.2562928476661, "y": 455.18742551457376, "value": 30.0, "title": "Confidence: 1.00<br>Stability: 0.68", "color": {"background": "rgba(150, 150, 250, 0.6774764060974121)", "border": "#4040A0"}}, {"id": 8, "label": "SIMD-based architectures clearly are powerful with...", "x": 561.2189611948356, "y": 5.920324665799342, "value": 30.0, "title": "Confidence: 1.00<br>Stability: 0.69", "color": {"background": "rgba(150, 150, 250, 0.6865211725234985)", "border": "#4040A0"}}, {"id": 9, "label": "Spiking refers to the event-driven communication o...", "x": 669.8961844845933, "y": 298.88922569612413, "value": 30.0, "title": "Confidence: 1.00<br>Stability: 0.74", "color": {"background": "rgba(150, 150, 250, 0.737118124961853)", "border": "#4040A0"}}, {"id": 10, "label": "How ensembles of such neurons can be constructed t...", "x": 655.1452477653347, "y": 143.11569088872338, "value": 30.0, "title": "Confidence: 1.00<br>Stability: 0.77", "color": {"background": "rgba(150, 150, 250, 0.7708796858787537)", "border": "#4040A0"}}, {"id": 11, "label": "NMC effectively provides a unique path to an MIMD ...", "x": 370.3747917350114, "y": 0.0, "value": 30.0, "title": "Confidence: 1.00<br>Stability: 0.70", "color": {"background": "rgba(150, 150, 250, 0.6964979767799377)", "border": "#4040A0"}}, {"id": 18, "label": "This paper explores the classes of computation for...", "x": 195.24225578825153, "y": 541.7003036596099, "value": 30.0, "title": "Confidence: 1.00<br>Stability: 0.66", "color": {"background": "rgba(150, 150, 250, 0.6579749584197998)", "border": "#4040A0"}}, {"id": 19, "label": "This paper describes how NMC can be viewed as a cl...", "x": 140.69731244230633, "y": 429.31936935640044, "value": 30.0, "title": "Confidence: 1.00<br>Stability: 0.84", "color": {"background": "rgba(150, 150, 250, 0.8440698981285095)", "border": "#4040A0"}}];
+    const edgesData = [{"from": 19, "to": 18, "value": 4.358449578285217, "color": "#FF6B6B", "title": "causation<br>Confidence: 0.87", "arrows": "to"}, {"from": 19, "to": 18, "value": 4.2221492528915405, "color": "#FFA06B", "title": "prevention<br>Confidence: 0.84", "arrows": "to"}, {"from": 19, "to": 18, "value": 4.249832034111023, "color": "#6BCF7F", "title": "enablement<br>Confidence: 0.85", "arrows": "to"}];
+    
+    // Create network
+    const container = document.getElementById('network');
+    const data = {
+        nodes: new vis.DataSet(nodesData),
+        edges: new vis.DataSet(edgesData)
+    };
+    
+    const options = {
+        nodes: {
+            shape: 'dot',
+            font: {
+                size: 12,
+                color: '#e0e0e0'
+            },
+            borderWidth: 2
+        },
+        edges: {
+            width: 2,
+            smooth: {
+                type: 'continuous',
+                roundness: 0.5
+            }
+        },
+        physics: {
+            enabled: true,
+            stabilization: {
+                iterations: 200
+            },
+            barnesHut: {
+                gravitationalConstant: -2000,
+                centralGravity: 0.3,
+                springLength: 100,
+                springConstant: 0.04
+            }
+        },
+        interaction: {
+            hover: true,
+            tooltipDelay: 200
+        }
+    };
+    
+    const network = new vis.Network(container, data, options);
+    
+    // Control functions
+    let physicsEnabled = true;
+    
+    function togglePhysics() {
+        physicsEnabled = !physicsEnabled;
+        network.setOptions({ physics: { enabled: physicsEnabled } });
+    }
+    
+    function resetView() {
+        network.fit();
+        console.log('Reset view called'); // Debug
+    }
+    
+    // Event handlers
+    network.on('click', function(params) {
+        const selectedInfo = document.getElementById('selected-info');
+        
+        if (params.nodes.length > 0) {
+            const nodeId = params.nodes[0];
+            const node = nodesData.find(n => n.id === nodeId);
+            selectedInfo.innerHTML = `
+                <h3>Concept: ${node.label}</h3>
+                <div>${node.title.replace('<br>', '<br/>')}</div>
+            `;
+        } else if (params.edges.length > 0) {
+            const edgeId = params.edges[0];
+            const edge = edgesData.find(e => e.id === edgeId);
+            if (edge) {
+                selectedInfo.innerHTML = `
+                    <h3>Relation</h3>
+                    <div>${edge.title.replace('<br>', '<br/>')}</div>
+                `;
+            }
+        }
+    });
+    
+    // Handle stabilization and initial setup
+    network.once('stabilizationIterationsDone', function() {
+        console.log('Stabilization done, fitting network'); // Debug
+        network.fit();
+        network.setOptions({ physics: false });
+        physicsEnabled = false;
+    });
+    
+    // Fallback fit after timeout
+    setTimeout(function() {
+        console.log('Timeout fit called'); // Debug
+        network.fit();
+    }, 2000);
+    
+    // Debug: Log when network is ready
+    network.once('afterDrawing', function() {
+        console.log('Network drawn successfully');
+    });
+</script>
+        </body>
+        </html>
+        
