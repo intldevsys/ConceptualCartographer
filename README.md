@@ -2,7 +2,10 @@
 
 An advanced natural language processing tool that automatically discovers conceptual structures, causal relationships, and semantic influences within text documents. Built with state-of-the-art machine learning techniques including transformer embeddings, HDBSCAN clustering, and statistical inference.
 
-## 🚀 What It Does
+<img width="1671" height="939" alt="image" src="https://github.com/user-attachments/assets/d756b05e-65c9-409d-8d07-04f574deb28c" />
+
+
+##  What It Does
 
 Conceptual Cartographer transforms unstructured text into rich, interactive conceptual maps by:
 
