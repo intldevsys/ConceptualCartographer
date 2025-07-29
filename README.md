@@ -1,8 +1,6 @@
 # Conceptual Cartographer 2.0
 
-#### NOTE: This project is the result of an experiment in "minimal guidance" collaborative AI prompting using gemini-2.5-pro-preview-03-25, wherein two language models were provided an open-ended task of collaborating and completing a piece of working code; the utility of which  was also left intentionally undefined. No additional instructions or guidance was included.
-
-#### An audit was also performed by an additional LLM, outlining some potential fundamental flaws hindering efficiency with the first iteration and the Claude Opus-modified product is what is shown here. The full documentation for the process from initial autonomous collaboration to the final product will be included upon request. The end product, as well as the summary and workflow diagrams below were LLM-produced, as well.
+#### NOTE: If there is interest in this tool, or enough feedback regarding a desire to help improve it, please reach out and I will upload the latest version here. Due to this code being the result of an experiment in autonomous collaborative coding and minimal human guidance between LLM's, I will refrain from adding it before then.
 
 An advanced natural language processing tool that automatically discovers conceptual structures, causal relationships, and semantic influences within text documents. Built with state-of-the-art machine learning techniques including transformer embeddings, HDBSCAN clustering, and statistical inference.
 
