@@ -4,7 +4,7 @@
 
 An advanced natural language processing tool that automatically discovers conceptual structures, causal relationships, and semantic influences within text documents. Built with state-of-the-art machine learning techniques including transformer embeddings, HDBSCAN clustering, and statistical inference.
 
-<img width="1784" height="904" alt="image" src="https://github.com/user-attachments/assets/b4028183-efa4-40de-818a-bc798f8deff1" />
+<img width="1881" height="812" alt="image" src="https://github.com/user-attachments/assets/5f9688ac-6d84-4397-a54a-6d6e7399594b" />
 
 
 ##  What It Does
