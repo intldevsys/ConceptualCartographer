@@ -1,10 +1,11 @@
+<img width="1881" height="812" alt="image" src="https://github.com/user-attachments/assets/5f9688ac-6d84-4397-a54a-6d6e7399594b" />
+
+
 # Conceptual Cartographer 2.0
 
 #### NOTE: If there is interest in this tool, or enough feedback regarding a desire to help improve it, please reach out and I will upload the latest version here. Due to this code being the result of an experiment in autonomous collaborative coding and minimal human guidance between LLM's, I will refrain from adding it before then.
 
 An advanced natural language processing tool that automatically discovers conceptual structures, causal relationships, and semantic influences within text documents. Built with state-of-the-art machine learning techniques including transformer embeddings, HDBSCAN clustering, and statistical inference.
-
-<img width="1881" height="812" alt="image" src="https://github.com/user-attachments/assets/5f9688ac-6d84-4397-a54a-6d6e7399594b" />
 
 
 ##  What It Does
