@@ -3,7 +3,6 @@
 
 # Conceptual Cartographer
 
-#### NOTE: This project is the result of an experiment in autonomous collaborative coding and minimal human guidance between LLM's. Due to the nature of it's origin, I will only provide the source code upon request.
 
 An advanced natural language processing tool that automatically discovers conceptual structures, causal relationships, and semantic influences within text documents. Built with state-of-the-art machine learning techniques including transformer embeddings, HDBSCAN clustering, and statistical inference.
 
